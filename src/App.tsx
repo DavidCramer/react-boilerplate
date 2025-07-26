@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 
 // Import Demo.
-import {FieldsDemo} from "@/components/demos/FieldsDemo";
+import {Demo} from "@/components/demos/Demo";
 
 const App: React.FC = () => {
 
@@ -17,18 +17,17 @@ const App: React.FC = () => {
 
     // Example of loading state.
     if (!loaded) {
-        return <div>Loading...</div>;
+        return (
+            <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+                <div className="text-center">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
+                    <p className="text-gray-600">Loading component library...</p>
+                </div>
+            </div>
+        );
     }
 
-    return (
-        <div className={`flex flex-col items-center justify-center bg-gray-100 p-6`}>
-            <div className={`p-4 bg-white shadow-md rounded-lg w-full max-w-4xl`}>
-                <h1 className={`font-semibold text-2xl`}>React Base</h1>
-                <p><FieldsDemo /></p>
-                {/* Add your components and logic here */}
-            </div>
-        </div>
-    );
+    return <Demo />;
 };
 
 
