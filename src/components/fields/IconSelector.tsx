@@ -61,6 +61,19 @@ const IconSelector: React.FC<IconSelectorProps> = ({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  // Scroll highlighted item into view
+  useEffect(() => {
+    if (highlightedIndex >= 0 && listRef.current && filteredIcons.length > 0) {
+      const highlightedElement = listRef.current.children[highlightedIndex] as HTMLElement;
+      if (highlightedElement) {
+        highlightedElement.scrollIntoView({
+          block: 'nearest',
+          behavior: 'smooth'
+        });
+      }
+    }
+  }, [highlightedIndex, filteredIcons.length]);
+
   // Keyboard navigation
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (!isOpen) {
@@ -74,15 +87,19 @@ const IconSelector: React.FC<IconSelectorProps> = ({
     switch (e.key) {
       case 'ArrowDown':
         e.preventDefault();
-        setHighlightedIndex(prev =>
-          prev < filteredIcons.length - 1 ? prev + 1 : 0
-        );
+        if (filteredIcons.length > 0) {
+          setHighlightedIndex(prev =>
+            prev < filteredIcons.length - 1 ? prev + 1 : 0
+          );
+        }
         break;
       case 'ArrowUp':
         e.preventDefault();
-        setHighlightedIndex(prev =>
-          prev > 0 ? prev - 1 : filteredIcons.length - 1
-        );
+        if (filteredIcons.length > 0) {
+          setHighlightedIndex(prev =>
+            prev > 0 ? prev - 1 : filteredIcons.length - 1
+          );
+        }
         break;
       case 'Enter':
         e.preventDefault();
@@ -176,6 +193,7 @@ const IconSelector: React.FC<IconSelectorProps> = ({
                 placeholder="Search icons..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyDown={handleKeyDown}
                 className="w-full pl-8 pr-3 py-1.5 text-sm border border-gray-200 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
                 autoFocus
               />

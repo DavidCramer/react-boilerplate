@@ -2,6 +2,7 @@ import React, { useState, useEffect} from 'react';
 import {IconSelector, SvgIcon} from "@/components";
 
 // Demo usage component
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface IconSelectorDemoProps {}
 
 const IconSelectorDemo: React.FC<IconSelectorDemoProps> = () => {
