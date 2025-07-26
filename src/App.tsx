@@ -21,8 +21,8 @@ const App: React.FC = () => {
     return (
         <div className={`flex flex-col items-center justify-center h-screen bg-gray-100`}>
             <div className={`p-4 bg-white shadow-md rounded-lg w-full max-w-md`}>
-                <h1 className={`font-semibold text-2xl`}>React Control Panel</h1>
-                <p>Welcome to the the control panel.</p>
+                <h1 className={`font-semibold text-2xl`}>React Base</h1>
+                <p>Start making stuff.</p>
                 {/* Add your components and logic here */}
             </div>
         </div>
